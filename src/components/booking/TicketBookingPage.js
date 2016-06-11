@@ -6,6 +6,7 @@ class TicketBookingPage extends Component{
 
 	constructor(props, context){
 		super(props,context);
+		//Initialize the State
 		this.state = {
 			ticket: { email: '' }
 		};
@@ -23,7 +24,11 @@ class TicketBookingPage extends Component{
 	}
 
 	onClickSave(){
-		this.props.dispatch(bookingActions.bookTickets(this.state.ticket));
+		//The below way is done when mapDispatchToProps is not passed to connect
+		//this.props.dispatch(bookingActions.bookTickets(this.state.ticket));
+		
+		//The below was is done when mapDispatchToProps is passed to connect
+		this.props.bookTickets(this.state.ticket);
 	}
 
 	ticketRow(ticket, index){
@@ -59,6 +64,14 @@ function mapStateToProps(state, ownProps){
 	};
 }
 
+function mapDispatchToProps(dispatch){
+	return{
+		//Arrow Functions with 'ticket' as param of anonymous function
+		//bookTickets is an action passed as Props to the Component
+		bookTickets: ticket => dispatch(bookingActions.bookTickets(ticket))
+	};
+}
+
 //Connect Method returns a function which takes an argument of TicketBookingPage
 //If we omit second param in connect, connect maps the Dispatch
-export default connect(mapStateToProps)(TicketBookingPage);
+export default connect(mapStateToProps,mapDispatchToProps)(TicketBookingPage);
