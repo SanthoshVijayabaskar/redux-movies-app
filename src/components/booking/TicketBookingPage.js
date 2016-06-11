@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as bookingActions from '../../actions/bookingActions';
+import {bindActionCreators} from 'redux';
 
 class TicketBookingPage extends Component{
 
@@ -24,11 +25,14 @@ class TicketBookingPage extends Component{
 	}
 
 	onClickSave(){
-		//The below way is done when mapDispatchToProps is not passed to connect
+		//method 1: The below way is done when mapDispatchToProps is not passed to connect
 		//this.props.dispatch(bookingActions.bookTickets(this.state.ticket));
 		
-		//The below was is done when mapDispatchToProps is passed to connect
-		this.props.bookTickets(this.state.ticket);
+		//method 2: The below was is done when mapDispatchToProps is passed to connect
+		//this.props.bookTickets(this.state.ticket);
+
+		//method 3: When Using bindActionCreators, mapping the dispatched props
+		this.props.actions.bookTickets(this.state.ticket);
 	}
 
 	ticketRow(ticket, index){
@@ -66,12 +70,18 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
 	return{
-		//Arrow Functions with 'ticket' as param of anonymous function
+
+		//method 1: no mapDispatchToProps passed in connect
+		
+		//method 2: Arrow Functions with 'ticket' as param of anonymous function
 		//bookTickets is an action passed as Props to the Component
-		bookTickets: ticket => dispatch(bookingActions.bookTickets(ticket))
+		//bookTickets: ticket => dispatch(bookingActions.bookTickets(ticket))
+		
+		//method 3: Using bindActionCreators
+		actions: bindActionCreators(bookingActions, dispatch)
 	};
 }
 
 //Connect Method returns a function which takes an argument of TicketBookingPage
-//If we omit second param in connect, connect maps the Dispatch
+//If we omit second param in connect, we can directly access the Dispatch
 export default connect(mapStateToProps,mapDispatchToProps)(TicketBookingPage);
