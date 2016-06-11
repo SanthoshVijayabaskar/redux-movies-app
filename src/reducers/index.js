@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import ticketBooking from './bookingReducers';
+import ticket from './bookingReducer';
 
 const rootReducer = combineReducers({
-	ticketBooking //Short-hand property name in ES6
+	ticket //Short-hand property name in ES6
 });
 
 export default rootReducer;

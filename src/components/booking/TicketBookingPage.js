@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import * as bookingActions from '../../actions/bookingActions';
 
-export default class TicketBookingPage extends Component{
+class TicketBookingPage extends Component{
 
 	constructor(props, context){
 		super(props,context);
@@ -10,6 +12,7 @@ export default class TicketBookingPage extends Component{
 
 		this.onEmailChange = this.onEmailChange.bind(this);
 		this.onClickSave = this.onClickSave.bind(this);
+		this.ticketRow = this.ticketRow.bind(this);
 		//Avoid calling .bind(this) in render due to performance issues
 	}
 
@@ -20,14 +23,18 @@ export default class TicketBookingPage extends Component{
 	}
 
 	onClickSave(){
-		alert('Saved');
+		this.props.dispatch(bookingActions.bookTickets(this.state.ticket));
+	}
+
+	ticketRow(ticket, index){
+		return <div key={index}>{ticket.email}</div>;
 	}
 
 	render(){
-
 		return (
 				<div>
 					<h4>Ticket Booking</h4>
+						{this.props.ticket.map(this.ticketRow)}
 					<h5>EMail</h5>
 					<input
 						type="text"
@@ -44,3 +51,14 @@ export default class TicketBookingPage extends Component{
 	}
 
 }
+
+//Props injected by the Components
+function mapStateToProps(state, ownProps){
+	return{
+		ticket: state.ticket //This is what we mentioned in rootReducer
+	};
+}
+
+//Connect Method returns a function which takes an argument of TicketBookingPage
+//If we omit second param in connect, connect maps the Dispatch
+export default connect(mapStateToProps)(TicketBookingPage);
