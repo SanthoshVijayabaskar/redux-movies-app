@@ -1,0 +1,16 @@
+/* CSS Styles */
+#app {
+	font: 15px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #4d4d4d;
+	min-width: 850px;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+a.active {
+	color: grey;
+}
+
+nav {
+	padding-top: 20px;
+}
