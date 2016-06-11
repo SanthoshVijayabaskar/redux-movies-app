@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as bookingActions from '../../actions/bookingActions';
 import {bindActionCreators} from 'redux';
+import BookingList from './BookingList';
 
 class TicketBookingPage extends Component{
 
@@ -14,10 +15,11 @@ class TicketBookingPage extends Component{
 	}
 
 	render(){
+		const {tickets} = this.props;
 		return (
 				<div>
 					<h4>My Bookings</h4>
-						{this.props.tickets.map(this.ticketRow)}
+						<BookingList tickets={tickets}/>
 				</div>
 			);
 
