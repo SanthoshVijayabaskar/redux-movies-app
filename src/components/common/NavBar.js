@@ -21,8 +21,11 @@ export default class NavBar extends Component{
 	      							<IndexLink to="/" activeClassName="active">{this.props.menuItem1} </IndexLink>
 	      							{ " | "}
 						           <Link to="/movies" activeClassName="active">{this.props.menuItem2}  </Link>
+						            { " | "}
+								   <Link to="/booking" activeClassName="active">{this.props.menuItem4}</Link>
 						           	{ " | "}
 								   <Link to="/about" activeClassName="active">{this.props.menuItem3}</Link>
+								   
         						</ul>
 						   </div>
 					  </div>

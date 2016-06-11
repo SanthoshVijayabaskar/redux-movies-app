@@ -12,7 +12,7 @@ export default class HomePage extends Component{
 
 		return (
 				<div>
-				<NavBar menuItem1="Home" menuItem2="Movies" menuItem3="About" />
+				<NavBar menuItem1="Home" menuItem2="Movies" menuItem3="About" menuItem4="Tickets"/>
 				<br></br>
 					<div style={divStyle}>
 						{this.props.children}
