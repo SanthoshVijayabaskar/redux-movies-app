@@ -41,7 +41,7 @@ const generateId = (ticket) => {
 };
 
 class BookingApi {
-  static getAllBooking() {
+  static getAllTickets() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], tickets));

@@ -8,9 +8,13 @@ import {Router, browserHistory} from 'react-router';
 import routes from './routes';
 import './styles/styles.css';
 
+import {loadMyTickets} from './actions/bookingActions';
+
 //ES6 Const Keyword
 const app = document.getElementById('app');
 const store = configureStore(); //You can also pass Initial State from backend here...
+store.dispatch(loadMyTickets());
+
 
 ReactDOM.render(
 	//Since we wrap the Provider at the Route Level, 

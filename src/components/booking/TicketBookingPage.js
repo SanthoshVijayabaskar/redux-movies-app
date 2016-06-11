@@ -7,32 +7,6 @@ class TicketBookingPage extends Component{
 
 	constructor(props, context){
 		super(props,context);
-		//Initialize the State
-		this.state = {
-			ticket: { email: '' }
-		};
-
-		this.onEmailChange = this.onEmailChange.bind(this);
-		this.onClickSave = this.onClickSave.bind(this);
-		this.ticketRow = this.ticketRow.bind(this);
-		//Avoid calling .bind(this) in render due to performance issues
-	}
-
-	onEmailChange(event){
-		const myTicket = this.state.ticket;
-		myTicket.email = event.target.value;
-		this.setState({ticket: myTicket});
-	}
-
-	onClickSave(){
-		//method 1: The below way is done when mapDispatchToProps is not passed to connect
-		//this.props.dispatch(bookingActions.bookTickets(this.state.ticket));
-		
-		//method 2: The below was is done when mapDispatchToProps is passed to connect
-		//this.props.bookTickets(this.state.ticket);
-
-		//method 3: When Using bindActionCreators, mapping the dispatched props
-		this.props.actions.bookTickets(this.state.ticket);
 	}
 
 	ticketRow(ticket, index){
@@ -42,18 +16,8 @@ class TicketBookingPage extends Component{
 	render(){
 		return (
 				<div>
-					<h4>Ticket Booking</h4>
-						{this.props.ticket.map(this.ticketRow)}
-					<h5>EMail</h5>
-					<input
-						type="text"
-						onChange={this.onEmailChange}
-						value={this.state.ticket.email}/>
-					
-					<input
-						type="submit"
-						value="Book Ticket"
-						onClick={this.onClickSave}/>
+					<h4>My Bookings</h4>
+						{this.props.tickets.map(this.ticketRow)}
 				</div>
 			);
 
@@ -64,7 +28,7 @@ class TicketBookingPage extends Component{
 //Props injected by the Components
 function mapStateToProps(state, ownProps){
 	return{
-		ticket: state.ticket //This is what we mentioned in rootReducer
+		tickets: state.tickets //This is what we mentioned in rootReducer
 	};
 }
 
